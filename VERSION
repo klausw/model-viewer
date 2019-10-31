@@ -1,0 +1,29 @@
+commit 6f4875528cee6db308bfc20037802e58821c1419
+Author: Emmett Lalish <elalish@google.com>
+Date:   Thu Oct 31 10:06:39 2019 -0700
+
+    More fidelity tests (#820)
+    
+    * added two more khronos tests
+    
+    * added the rest of the khronos tests
+    
+    * refactored intrinsics
+    
+    * fixed framing bugs
+    
+    * workaround for filament camera
+    
+    * updated goldens
+    
+    * updated to fit with new camera sync
+    
+    * refactored
+    
+    * bumped filament version and removed hacks
+    
+    * cleanup
+    
+    * addressing feedback
+    
+    * fixed culled animations

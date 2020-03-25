@@ -508,5 +508,25 @@ export class ARRenderer extends EventDispatcher {
     // @see https://github.com/googlecodelabs/ar-with-webxr/issues/8
     // this.threeRenderer.clearDepth();
     this.threeRenderer.render(scene, this.camera);
+
+        let lineWidth = 16;
+        let lineSpeed = 1;
+        let windowWidth = window.innerWidth;
+        let dpr = window.devicePixelRatio;
+        const gl = assertContext(this.renderer.context3D);
+        let width = this[$currentSession]!.renderState!.baseLayer!.framebufferWidth;
+        let height = this[$currentSession]!.renderState!.baseLayer!.framebufferHeight;
+        let frac = ((performance.now() / lineSpeed) % windowWidth) / windowWidth;
+        let pos = frac * width;
+        gl.enable(gl.SCISSOR_TEST);
+        gl.clearColor(1, 1, 1, 1);
+        gl.scissor(pos, height * 3/4, lineWidth * dpr, height / 4);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.clearColor(0, 0, 0, 0);
+        gl.disable(gl.SCISSOR_TEST);
+
+        let line = document.getElementById("anno-line");
+        line!.style.width = lineWidth + "px";
+        line!.style.left = (frac * windowWidth) + "px";
   }
 }

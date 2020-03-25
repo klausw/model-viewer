@@ -106,6 +106,15 @@
     border-radius: 10px;
     padding: 10px;
   }
+
+  #anno-line {
+    background-color: white;
+    position: absolute;
+    top: 25vh;
+    left: 0vh;
+    width: 16px;
+    height: 25vh;
+  }
   /* This keeps child nodes hidden while the element loads */
   :not(:defined) > * {
     display: none;
@@ -118,6 +127,7 @@
   </button>
   <button slot="hotspot-foot" data-position="0.16 0.1 0.17" data-normal="-0.07 0.97 0.23" data-visibility-attribute="visible"></button>
   <div id="annotation">This annotation is fixed in screen-space</div>
+  <div id="anno-line"></div>
 </model-viewer>
           </template>
         </example-snippet>

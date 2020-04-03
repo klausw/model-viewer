@@ -21,8 +21,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no,
   minimum-scale=1.0, maximum-scale=1.0">
-  <link type="text/css" href="styles/examples.css" rel="stylesheet" />
-  <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
+  <link type="text/css" href="../styles/examples.css" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/png" href="../assets/favicon.png"/>
 
   <!-- The following libraries and polyfills are recommended to maximize browser support -->
 
@@ -65,52 +65,52 @@
 <body>
   <div class="demo">
     <div class="grid">
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (1 of 16)"
                       auto-rotate background-color="#40C4FF"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (2 of 16)"
                       auto-rotate background-color="#455A64"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (3 of 16)"
                       auto-rotate background-color="#EEFF41"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (4 of 16)"
                       auto-rotate background-color="#ff5252"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (5 of 16)"
                       auto-rotate background-color="#651FFF"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (6 of 16)"
                       auto-rotate background-color="#1DE9B6"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (7 of 16)"
                       auto-rotate background-color="#FF4081"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (8 of 16)"
                       auto-rotate background-color="#424242"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (9 of 16)"
                       auto-rotate background-color="#40C4FF"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (10 of 16)"
                       auto-rotate background-color="#455A64"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (11 of 16)"
                       auto-rotate background-color="#EEFF41"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (12 of 16)"
                       auto-rotate background-color="#ff5252"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (13 of 16)"
                       auto-rotate background-color="#651FFF"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (14 of 16)"
                       auto-rotate background-color="#1DE9B6"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (15 of 16)"
                       auto-rotate background-color="#FF4081"></model-viewer>
-        <model-viewer src="assets/Astronaut.glb"
+        <model-viewer src="../shared-assets/models/Astronaut.glb"
                       alt="A 3D model of an astronaut (16 of 16)"
                       auto-rotate background-color="#424242"></model-viewer>
     </div>
@@ -126,12 +126,12 @@
 
   <!-- Loads <model-viewer> only on modern browsers: -->
   <script type="module"
-      src="../dist/model-viewer.js">
+      src="../node_modules/@google/model-viewer/dist/model-viewer.js">
   </script>
 
   <!-- Loads <model-viewer> only on old browsers like IE11: -->
   <script nomodule
-      src="../dist/model-viewer-legacy.js">
+      src="../node_modules/@google/model-viewer/dist/model-viewer-legacy.js">
   </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* @license
- * Copyright 2019 Google LLC. All Rights Reserved.
+ * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,7 @@
 const fs = require('fs').promises;
 const {jsTransform} = require('polymer-build/lib/js-transform');
 
-const bundlesToTransform = [
-  './dist/model-viewer-umd.js',
-  './dist/unit-tests-umd.js',
-  './examples/built/dependencies-umd.js'
-];
+const bundlesToTransform = ['./examples/built/dependencies-umd.js', './examples/built/tester-umd.js'];
 
 console.log('Generating legacy bundles for IE11 compatibility...');
 

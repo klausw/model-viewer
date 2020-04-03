@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google LLC. All Rights Reserved.
+ * Copyright 2020 Google LLC. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,173 +13,65 @@
  * limitations under the License.
  */
 
-const path = require('path');
 const resolve = require('rollup-plugin-node-resolve');
-const cleanup = require('rollup-plugin-cleanup');
-
-const {NODE_ENV} = process.env;
-const addPath = files => files.map(f => path.join(__dirname, f));
-
-// Tag well-known warnings so we can silence them.
-const IGNORE_WARNINGS = {
-  // Some third party code emits warnings from parsing their
-  // UMD/commonjs exporting.
-  THIS_IS_UNDEFINED: addPath(['node_modules/marked/lib/marked.js']),
-  // Some third party libraries may have optional modules.
-  MISSING_EXPORT: addPath(['lib/third_party/three/GLTFLoader.js']),
-};
+const replace = require('rollup-plugin-replace');
 
 const onwarn = (warning, warn) => {
-  const filesToIgnore = IGNORE_WARNINGS[warning.code];
-  if (filesToIgnore && filesToIgnore.indexOf(warning.id) !== -1) {
-    return;
+  // Suppress non-actionable warning caused by TypeScript boilerplate:
+  if (warning.code !== 'THIS_IS_UNDEFINED') {
+    warn(warning);
   }
-
-  warn(warning);
 };
 
-const plugins = [
-  resolve(),
+const plugins = [resolve(), replace({'Reflect.decorate': 'undefined'})];
+
+const watchFiles = ['lib/**', '../3dom/lib/**', '../model-viewer/lib/**'];
+
+const outputOptions = [
+  {
+    input: './lib/components/example-snippet.js',
+    output: {
+      file: './examples/built/dependencies.js',
+      format: 'esm',
+      name: 'DocumentationDependencies'
+    },
+    plugins,
+    onwarn,
+  },
+  {
+    input: './lib/components/example-snippet.js',
+    output: {
+      file: './examples/built/dependencies-umd.js',
+      format: 'umd',
+      name: 'DocumentationDependencies'
+    },
+    plugins,
+    onwarn,
+  },
+  {
+    input: './lib/tester.js',
+    output: {
+      file: './examples/built/tester.js',
+      sourcemap: true,
+      format: 'esm',
+      name: 'Tester'
+    },
+    watch: {
+      include: watchFiles,
+    },
+    plugins,
+    onwarn
+  },
+  {
+    input: './lib/tester.js',
+    output:
+        {file: './examples/built/tester-umd.js', format: 'umd', name: 'Tester'},
+    watch: {
+      include: watchFiles,
+    },
+    plugins,
+    onwarn,
+  },
 ];
-
-const outputOptions = [{
-  input: './lib/model-viewer.js',
-  output: {
-    file: './dist/model-viewer.js',
-    sourcemap: true,
-    format: 'esm',
-    name: 'ModelViewerElement'
-  },
-  watch: {
-    include: 'lib/**',
-  },
-  plugins,
-  onwarn,
-}];
-
-if (NODE_ENV !== 'development') {
-  plugins.unshift(cleanup({
-    // Ideally we'd also clean third_party/three, which saves
-    // ~45kb in filesize alone... but takes 2 minutes to build
-    include: ['lib/**'],
-    comments: 'none',
-  }));
-
-  outputOptions.push(
-      {
-        input: './lib/model-viewer.js',
-        output: {
-          file: './dist/model-viewer-umd.js',
-          sourcemap: true,
-          format: 'umd',
-          name: 'ModelViewerElement'
-        },
-        watch: {
-          include: 'lib/**',
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/test/index.js',
-        output: {
-          file: './dist/unit-tests.js',
-          format: 'esm',
-          name: 'ModelViewerElementUnitTests'
-        },
-        watch: {
-          include: 'lib/**',
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/test/index.js',
-        output: {
-          file: './dist/unit-tests-umd.js',
-          format: 'umd',
-          name: 'ModelViewerElementUnitTests'
-        },
-        watch: {
-          include: 'lib/**',
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/test/fidelity/components/image-comparison-app.js',
-        output: {
-          file: './dist/image-comparison-app.js',
-          sourcemap: true,
-          format: 'iife',
-          name: 'ImageComparisonApp'
-        },
-        watch: {
-          include: '{lib/test/fidelity/**,lib/third_party/**}',
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/test/fidelity/components/renderer-harness.js',
-        output: {
-          file: './dist/renderer-harness.js',
-          sourcemap: true,
-          format: 'esm',
-        },
-        watch: {
-          include: '{lib/test/fidelity/**,lib/third_party/**}',
-        },
-        plugins,
-        onwarn
-      },
-      {
-        input: './lib/test/fidelity/components/renderers/filament-viewer.js',
-        output: {
-          file: './dist/filament-viewer.js',
-          sourcemap: true,
-          format: 'esm',
-        },
-        watch: {
-          include: '{lib/test/fidelity/**,lib/third_party/**}',
-        },
-        plugins,
-        onwarn
-      },
-      {
-        input: './lib/test/fidelity/image-comparison-worker.js',
-        output: {
-          file: './dist/image-comparison-worker.js',
-          sourcemap: true,
-          format: 'iife',
-          name: 'ImageComparisonWorker'
-        },
-        watch: {
-          include: '{lib/test/fidelity/**,lib/third_party/**}',
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/documentation/components/example-snippet.js',
-        output: {
-          file: './examples/built/dependencies.js',
-          format: 'esm',
-          name: 'DocumentationDependencies'
-        },
-        plugins,
-        onwarn,
-      },
-      {
-        input: './lib/documentation/components/example-snippet.js',
-        output: {
-          file: './examples/built/dependencies-umd.js',
-          format: 'umd',
-          name: 'DocumentationDependencies'
-        },
-        plugins,
-        onwarn,
-      });
-}
 
 export default outputOptions;

@@ -21,8 +21,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no,
   minimum-scale=1.0, maximum-scale=1.0">
-  <link type="text/css" href="styles/examples.css" rel="stylesheet" />
-  <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
+  <link type="text/css" href="../styles/examples.css" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/png" href="../assets/favicon.png"/>
   <script src="../node_modules/resize-observer-polyfill/dist/ResizeObserver.js"></script>
 
   <!-- The following libraries and polyfills are recommended to maximize browser support -->
@@ -74,9 +74,9 @@
         <a href="https://github.com/GoogleWebComponents/model-viewer/blob/master/examples/fuzzer.html"
           class="viewSource">View source<a/>
 
-        <script src="./scripts/helpers.js"></script>
+        
         <script src="./built/dependencies.js"></script>
-        <script src="../dist/model-viewer.js"></script>
+        <script src="../node_modules/@google/model-viewer/dist/model-viewer.js"></script>
 <script>
 const model = $('#fuzzee');
 const randomFrom = array => array[Math.floor(Math.random() * array.length)];
@@ -99,7 +99,7 @@ const attributes = [{
         'not-a-color',
     ],
 }, {
-    name: 'background-image',
+    name: 'skybox-image',
     probability: 0.5,
     values: [
         'assets/spruit_sunrise_1k_LDR.jpg',

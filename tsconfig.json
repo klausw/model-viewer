@@ -15,13 +15,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "./lib",
+    "rootDir": "./src",
     "experimentalDecorators": true,
     "noErrorTruncation": true,
     "declaration": true
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.js"
+    "./src/**/*.ts"
   ],
   "exclude": []
 }

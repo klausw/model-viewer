@@ -21,8 +21,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no,
   minimum-scale=1.0, maximum-scale=1.0">
-  <link type="text/css" href="styles/examples.css" rel="stylesheet" />
-  <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
+  <link type="text/css" href="../styles/examples.css" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/png" href="../assets/favicon.png"/>
   <script src="../node_modules/resize-observer-polyfill/dist/ResizeObserver.js"></script>
 
   <!-- The following libraries and polyfills are recommended to maximize browser support -->
@@ -45,6 +45,13 @@
   <!-- 💁 OPTIONAL: Include prismatic.js for Magic Leap support -->
   <!--<script src="../node_modules/@magicleap/prismatic/prismatic.min.js"></script>-->
 
+  <script>
+window.oscillate = function(min, max, period, time) {
+  const mag = max - min;
+  return Math.cos(Math.PI + 2 * Math.PI * time / period) * (min + mag / 2.0) +
+      mag / 2.0;
+};
+  </script>
 </head>
 <body>
 
@@ -53,14 +60,14 @@
     <div class="content">
       <div class="wrapper">
         <a class="lockup" href="../index.html"><div class="icon-button icon-modelviewer-black"></div><h1>examples</h1></a>
-        <h4 id="intro"><span class="font-medium">Lighting &amp; Environment. </span>Control the lighting and the environment surrounding &lt;model-viewer&gt;. This page showcases the background-image attribute, which links to an equirectangular projection image which is used as the skybox, and applied as an environment map to the model.</h4>
+        <h4 id="intro"><span class="font-medium">Lighting &amp; Environment. </span>Control the lighting and the environment surrounding &lt;model-viewer&gt;. This page showcases the skybox-image attribute, which links to an equirectangular projection image which is used as the skybox, and applied as an environment map to the model.</h4>
         <div class="heading">
-          <h2 class="demo-title">An equirectangular HDR <span class="attribute">background-image</span></h2>
+          <h2 class="demo-title">An equirectangular HDR <span class="attribute">skybox-image</span></h2>
           <h4></h4>
         </div>
         <example-snippet stamp-to="demo-container-1" highlight-as="html">
           <template>
-  <model-viewer camera-controls background-image="assets/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of a damaged helmet" src="assets/DamagedHelmet/DamagedHelmet.gltf"></model-viewer>
+  <model-viewer camera-controls skybox-image="../shared-assets/environments/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of a damaged helmet" src="../shared-assets/models/glTF-Sample-Models/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -72,12 +79,12 @@
     <div class="content">
       <div class="wrapper">
         <div class="heading">
-          <h2 class="demo-title">An equirectangular HDR <span class="attribute">background-image</span></h2>
+          <h2 class="demo-title">An equirectangular HDR <span class="attribute">skybox-image</span></h2>
           <h4></h4>
         </div>
         <example-snippet stamp-to="demo-container-2" highlight-as="html">
           <template>
-<model-viewer camera-controls background-image="assets/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of metal spheres at varying degrees of roughness" src="assets/glTF-Sample-Models/2.0/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf"></model-viewer>
+<model-viewer camera-controls skybox-image="../shared-assets/environments/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of metal spheres at varying degrees of roughness" src="../shared-assets/models/glTF-Sample-Models/2.0/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -89,12 +96,12 @@
       <div class="content">
         <div class="wrapper">
           <div class="heading">
-            <h2 class="demo-title">An equirectangular LDR <span class="attribute">background-image</span></h2>
+            <h2 class="demo-title">An equirectangular LDR <span class="attribute">skybox-image</span></h2>
             <h4></h4>
           </div>
           <example-snippet stamp-to="demo-container-2.5" highlight-as="html">
             <template>
-  <model-viewer camera-controls background-image="assets/spruit_sunrise_1k_LDR.jpg" alt="A 3D model of metal spheres at varying degrees of roughness" src="assets/glTF-Sample-Models/2.0/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf"></model-viewer>
+  <model-viewer camera-controls skybox-image="../shared-assets/environments/spruit_sunrise_1k_LDR.jpg" alt="A 3D model of metal spheres at varying degrees of roughness" src="../shared-assets/models/glTF-Sample-Models/2.0/MetalRoughSpheres/glTF/MetalRoughSpheres.gltf"></model-viewer>
             </template>
           </example-snippet>
         </div>
@@ -106,12 +113,12 @@
     <div class="content">
       <div class="wrapper">
         <div class="heading">
-          <h2 class="demo-title">An equirectangular <span class="attribute">background-image</span> with a lit model</h2>
+          <h2 class="demo-title">An equirectangular <span class="attribute">skybox-image</span> with a lit model</h2>
           <h4></h4>
         </div>
         <example-snippet stamp-to="demo-container-3" highlight-as="html">
           <template>
-  <model-viewer camera-controls background-image="assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D astronaut model depicted within a forest" src="assets/Astronaut.glb"></model-viewer>
+  <model-viewer camera-controls skybox-image="../assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D astronaut model depicted within a forest" src="../shared-assets/models/Astronaut.glb"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -123,29 +130,12 @@
     <div class="content">
       <div class="wrapper">
         <div class="heading">
-          <h2 class="demo-title">An equirectangular <span class="attribute">background-image</span> with an unlit model</h2>
+          <h2 class="demo-title">An equirectangular <span class="attribute">skybox-image</span> with an unlit model</h2>
           <h4></h4>
         </div>
         <example-snippet stamp-to="demo-container-3.5" highlight-as="html">
           <template>
-  <model-viewer camera-controls background-image="assets/whipple_creek_regional_park_04_1k.hdr" alt="An unlit 3D astronaut model depicted within a forest" src="assets/Astronaut-Unlit.glb"></model-viewer>
-          </template>
-        </example-snippet>
-      </div>
-    </div>
-  </div>
-
-  <div class="sample">
-    <div id="demo-container-4" class="demo"></div>
-    <div class="content">
-      <div class="wrapper">
-        <div class="heading">
-          <h2 class="demo-title">When both <span class="attribute">background-image</span> and <span class="attribute">background-color</span> are specified, the former takes precedence</h2>
-          <h4></h4>
-        </div>
-        <example-snippet stamp-to="demo-container-4" highlight-as="html">
-          <template>
-<model-viewer camera-controls background-color="#ff0077" background-image="assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D model of a reflective sphere depicted within a forest" src="assets/reflective-sphere.gltf"></model-viewer>
+  <model-viewer camera-controls skybox-image="../assets/whipple_creek_regional_park_04_1k.hdr" alt="An unlit 3D astronaut model depicted within a forest" src="../shared-assets/models/Astronaut-Unlit.glb"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -162,7 +152,7 @@
         </div>
         <example-snippet stamp-to="demo-container-5" highlight-as="html">
           <template>
-<model-viewer camera-controls background-color="#ff0077" environment-image="assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D model of a sphere reflecting a forest, on a pink background" src="assets/reflective-sphere.gltf"></model-viewer>
+<model-viewer camera-controls environment-image="../assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D model of a sphere reflecting a forest, on a pink background" src="../shared-assets/models/reflective-sphere.gltf"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -174,12 +164,12 @@
     <div class="content">
       <div class="wrapper">
         <div class="heading">
-          <h2 class="demo-title">Supports different <span class="attribute">background-image</span> and <span class="attribute">environment-image</span> images</h2>
+          <h2 class="demo-title">Supports different <span class="attribute">skybox-image</span> and <span class="attribute">environment-image</span> images</h2>
           <h4></h4>
         </div>
         <example-snippet stamp-to="demo-container-6" highlight-as="html">
           <template>
-<model-viewer camera-controls background-image="assets/whipple_creek_regional_park_04_1k.hdr" environment-image="assets/spruit_sunrise_1k_LDR.jpg" alt="A 3D model of a sphere reflecting a sunrise, backdropped by a forest" src="assets/reflective-sphere.gltf"></model-viewer>
+<model-viewer camera-controls skybox-image="../assets/whipple_creek_regional_park_04_1k.hdr" environment-image="../shared-assets/environments/spruit_sunrise_1k_LDR.jpg" alt="A 3D model of a sphere reflecting a sunrise, backdropped by a forest" src="../shared-assets/models/reflective-sphere.gltf"></model-viewer>
           </template>
         </example-snippet>
       </div>
@@ -196,10 +186,10 @@
       </div>
       <example-snippet stamp-to="demo-container-7" highlight-as="html">
         <template>
-<model-viewer camera-controls id="exposure-demo" exposure="1" background-image="assets/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of a sphere reflecting a sunrise at varying exposure" src="assets/reflective-sphere.gltf"></model-viewer>
+<model-viewer camera-controls id="exposure-demo" exposure="1" skybox-image="../shared-assets/environments/spruit_sunrise_1k_HDR.hdr" alt="A 3D model of a sphere reflecting a sunrise at varying exposure" src="../shared-assets/models/reflective-sphere.gltf"></model-viewer>
 <script>
 (() => {
-  const modelViewer = $('#exposure-demo');
+  const modelViewer = document.querySelector('#exposure-demo');
   const time = performance.now();
 
   const animate = (now) => {
@@ -226,10 +216,10 @@
         </div>
         <example-snippet stamp-to="demo-container-9" highlight-as="html">
           <template>
-<model-viewer camera-controls id="shadow-intensity-demo" shadow-intensity="0" shadow-softness="0" background-color="#ff0077" environment-image="assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D model of a sphere reflecting a forest with varying shadow intensity" src="assets/reflective-sphere.gltf"></model-viewer>
+<model-viewer camera-controls id="shadow-intensity-demo" shadow-intensity="0" shadow-softness="0" environment-image="../assets/whipple_creek_regional_park_04_1k.hdr" alt="A 3D model of a sphere reflecting a forest with varying shadow intensity" src="../shared-assets/models/reflective-sphere.gltf"></model-viewer>
 <script>
 (() => {
-  const modelViewer = $('#shadow-intensity-demo');
+  const modelViewer = document.querySelector('#shadow-intensity-demo');
   const time = performance.now();
 
   const animate = (now) => {
@@ -272,7 +262,7 @@
     <div><a href="https://github.com/GoogleWebComponents/model-viewer">Github</a> ∙ <a href="https://model-viewer.glitch.me/">Glitch</a> ∙ <a href="https://github.com/GoogleWebComponents/model-viewer/issues">Bug report</a></div>
   </div>
 
-  <script src="./scripts/helpers.js"></script>
+  
 
   <!-- Documentation-specific dependencies: -->
   <script type="module"
@@ -284,12 +274,12 @@
 
   <!-- Loads <model-viewer> only on modern browsers: -->
   <script type="module"
-      src="../dist/model-viewer.js">
+      src="../node_modules/@google/model-viewer/dist/model-viewer.js">
   </script>
 
   <!-- Loads <model-viewer> only on old browsers like IE11: -->
   <script nomodule
-      src="../dist/model-viewer-legacy.js">
+      src="../node_modules/@google/model-viewer/dist/model-viewer-legacy.js">
   </script>
 </body>
 </html>
